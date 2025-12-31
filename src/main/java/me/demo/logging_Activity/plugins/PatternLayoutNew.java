@@ -1,5 +1,8 @@
 package me.demo.logging_Activity.plugins;
 
+//It's a clone of PattenLayout with an array reference of RegexReplacement
+//For Testing purpose only
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.plugins.*;
@@ -33,7 +36,7 @@ public class PatternLayoutNew extends AbstractStringLayout {
     private final PatternSelector patternSelector;
     private final AbstractStringLayout.Serializer eventSerializer;
 
-    private PatternLayoutNew(final Configuration config, final RegexReplacement replace, final String eventPattern, final PatternSelector patternSelector, final Charset charset, final boolean alwaysWriteExceptions, final boolean disableAnsi, final boolean noConsoleNoAnsi, final String headerPattern, final String footerPattern) {
+    private PatternLayoutNew(final Configuration config, final RegexReplacement[] replace, final String eventPattern, final PatternSelector patternSelector, final Charset charset, final boolean alwaysWriteExceptions, final boolean disableAnsi, final boolean noConsoleNoAnsi, final String headerPattern, final String footerPattern) {
         super(config, charset, newSerializerBuilder().setConfiguration(config).setReplace(replace).setPatternSelector(patternSelector).setAlwaysWriteExceptions(alwaysWriteExceptions).setDisableAnsi(disableAnsi).setNoConsoleNoAnsi(noConsoleNoAnsi).setPattern(headerPattern).build(), newSerializerBuilder().setConfiguration(config).setReplace(replace).setPatternSelector(patternSelector).setAlwaysWriteExceptions(alwaysWriteExceptions).setDisableAnsi(disableAnsi).setNoConsoleNoAnsi(noConsoleNoAnsi).setPattern(footerPattern).build());
         this.conversionPattern = eventPattern;
         this.patternSelector = patternSelector;
@@ -117,7 +120,7 @@ public class PatternLayoutNew extends AbstractStringLayout {
 
     @PluginFactory
     @Deprecated
-    public static PatternLayoutNew createLayout(@PluginAttribute(value = "pattern", defaultString = "%m%n") final String pattern, @PluginElement("PatternSelector") final PatternSelector patternSelector, @PluginConfiguration final Configuration config, @PluginElement("Replace") final RegexReplacement replace, @PluginAttribute("charset") final Charset charset, @PluginAttribute(value = "alwaysWriteExceptions", defaultBoolean = true) final boolean alwaysWriteExceptions, @PluginAttribute("noConsoleNoAnsi") final boolean noConsoleNoAnsi, @PluginAttribute("header") final String headerPattern, @PluginAttribute("footer") final String footerPattern) {
+    public static PatternLayoutNew createLayout(@PluginAttribute(value = "pattern", defaultString = "%m%n") final String pattern, @PluginElement("PatternSelector") final PatternSelector patternSelector, @PluginConfiguration final Configuration config, @PluginElement("Replace") final RegexReplacement[] replace, @PluginAttribute("charset") final Charset charset, @PluginAttribute(value = "alwaysWriteExceptions", defaultBoolean = true) final boolean alwaysWriteExceptions, @PluginAttribute("noConsoleNoAnsi") final boolean noConsoleNoAnsi, @PluginAttribute("header") final String headerPattern, @PluginAttribute("footer") final String footerPattern) {
         return newBuilder().withPattern(pattern).withPatternSelector(patternSelector).withConfiguration(config).withRegexReplacement(replace).withCharset(charset).withAlwaysWriteExceptions(alwaysWriteExceptions).withNoConsoleNoAnsi(noConsoleNoAnsi).withHeader(headerPattern).withFooter(footerPattern).build();
     }
 
@@ -215,9 +218,9 @@ public class PatternLayoutNew extends AbstractStringLayout {
 
     private static final class PatternSerializerWithReplacement implements AbstractStringLayout.Serializer, LocationAware {
         private final PatternSerializer delegate;
-        private final RegexReplacement replace;
+        private final RegexReplacement[] replace;
 
-        private PatternSerializerWithReplacement(final PatternSerializer delegate, final RegexReplacement replace) {
+        private PatternSerializerWithReplacement(final PatternSerializer delegate, final RegexReplacement[] replace) {
             this.delegate = delegate;
             this.replace = replace;
         }
@@ -238,7 +241,9 @@ public class PatternLayoutNew extends AbstractStringLayout {
         public StringBuilder toSerializable(final LogEvent event, final StringBuilder buf) {
             StringBuilder buffer = this.delegate.toSerializable(event, buf);
             String str = buffer.toString();
-            str = this.replace.format(str);
+            for (RegexReplacement replacement : this.replace) {
+                str = replacement.format(str);
+            }
             buffer.setLength(0);
             buffer.append(str);
             return buffer;
@@ -255,7 +260,7 @@ public class PatternLayoutNew extends AbstractStringLayout {
 
     public static class SerializerBuilder implements org.apache.logging.log4j.core.util.Builder<AbstractStringLayout.Serializer> {
         private Configuration configuration;
-        private RegexReplacement replace;
+        private RegexReplacement[] replace;
         private String pattern;
         private String defaultPattern;
         private PatternSelector patternSelector;
@@ -299,7 +304,7 @@ public class PatternLayoutNew extends AbstractStringLayout {
             return this;
         }
 
-        public SerializerBuilder setReplace(final RegexReplacement replace) {
+        public SerializerBuilder setReplace(final RegexReplacement[] replace) {
             this.replace = replace;
             return this;
         }
@@ -337,9 +342,9 @@ public class PatternLayoutNew extends AbstractStringLayout {
 
     private static final class PatternSelectorSerializer implements AbstractStringLayout.Serializer, LocationAware {
         private final PatternSelector patternSelector;
-        private final RegexReplacement replace;
+        private final RegexReplacement[] replace;
 
-        private PatternSelectorSerializer(final PatternSelector patternSelector, final RegexReplacement replace) {
+        private PatternSelectorSerializer(final PatternSelector patternSelector, final RegexReplacement[] replace) {
             this.patternSelector = patternSelector;
             this.replace = replace;
         }
@@ -364,7 +369,9 @@ public class PatternLayoutNew extends AbstractStringLayout {
 
             if (this.replace != null) {
                 String str = buffer.toString();
-                str = this.replace.format(str);
+                for (RegexReplacement replacement : this.replace) {
+                    str = replacement.format(str);
+                }
                 buffer.setLength(0);
                 buffer.append(str);
             }
@@ -395,7 +402,7 @@ public class PatternLayoutNew extends AbstractStringLayout {
         @PluginConfiguration
         private Configuration configuration;
         @PluginElement("Replace")
-        private RegexReplacement regexReplacement;
+        private RegexReplacement[] regexReplacement;
         @PluginBuilderAttribute
         private Charset charset;
         @PluginBuilderAttribute
@@ -438,7 +445,7 @@ public class PatternLayoutNew extends AbstractStringLayout {
             return this;
         }
 
-        public Builder withRegexReplacement(final RegexReplacement regexReplacement) {
+        public Builder withRegexReplacement(final RegexReplacement[] regexReplacement) {
             this.regexReplacement = regexReplacement;
             return this;
         }
