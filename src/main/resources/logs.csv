@@ -1,0 +1,18 @@
+2025-11-12 17:10:01 INFO User login successful for alice@example.com
+2025-11-12 17:10:01 DEBUG JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZUBleGFtcGxlLmNvbSIsImlhdCI6MTYwNzg2MzY4NX0.Z4YBHzK2f1QO3SRSvkh5RgQeJQ5PrxWqHdl9Ue7dXzM
+2025-11-12 17:10:02 INFO Authorization header received: Bearer eyJraWQiOiJrZXkxIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJib2JAdGVzdC5jb20iLCJyb2xlIjoiVVNFUiJ9.g4nTsw7I_EFZpED6K2M5mI9hBPNuFGkC4Pp1lBC5_hs
+2025-11-12 17:10:03 DEBUG Token parsed for user: charlie@company.co.in => exp=2025-11-12T18:10:03Z
+2025-11-12 17:10:04 WARN Invalid JWT detected for user dave.smith@org.io : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZGF2ZS5zbWl0aEBvcmcuaW8ifQ.pj7Y1y4kkQYh4eRaUTwX2oqlmDgEv5dvU0QX_E4e8qE
+2025-11-12 17:10:05 INFO Password reset for eve@sub.domain.org sent successfully
+2025-11-12 17:10:06 DEBUG API Response: {"email":"frank@sample.in","token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZnJhbmtAc2FtcGxlLmluIn0.hU76T9dIlf7ZxGbGZZKjYX12u5uONakdPMK2g4Nn7cc"}
+2025-11-12 17:10:07 INFO Set-Cookie: jwt=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdlb3JnZUBleGFtcGxlLmNvbSJ9.6-VmbC2mx1vFzVULrJaa2q2bLbSsqBbBPLvJNg5Ug34; Path=/; HttpOnly
+2025-11-12 17:10:08 DEBUG Stored in DB: INSERT INTO users(email, token) VALUES('hannah@xyz.com','eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Imhhbm5haEB4eXouY29tIn0.J9Cp6biq0UHgPv6ETnItS1Ics5SDbQi2xNQ0YJWUVrA')
+2025-11-12 17:10:09 WARN Authorization attempt with expired token for user: ivan@securemail.net
+2025-11-12 17:10:09 DEBUG Expired Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpdmFuQHNlY3VyZW1haWwubmV0IiwiZXhwIjoxNjA3ODYzNjg1fQ.0y-EZ5z4zmtL4z4tXGqReU6uWEsRY1zR1QeRp8T2T6U
+2025-11-12 17:10:10 INFO Sending verification email to jenny.doe@company.com
+2025-11-12 17:10:10 DEBUG Payload: {"email":"jenny.doe@company.com","jwt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiamVubnkuZG9lQGNvbXBhbnkuY29tIn0.GFQh3g2FlQ7WQ7pq1hEwlK3XH2qVv9W2iZ7zZQcz7qk"}
+2025-11-12 17:10:11 ERROR Token verification failed for user kevin@internal.local
+2025-11-12 17:10:11 DEBUG Header Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtldmluQGludGVybmFsLmxvY2FsIn0.AS2ah9G4bY5bO0pMlNGEb9KhP1tJReLhOf-8wqRu3jE
+2025-11-12 17:10:12 INFO User logged out: lucy@example.org JWT=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdWN5QGV4YW1wbGUub3JnIn0._B3qT6Uut2Z5oZPgRzDp3bYl5cdhJkoTdg_f7tMcVr8
+2025-11-12 17:10:14 ERROR Token verification ab.cd.ef
+lucy@example.org +9112345678 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdWN5QGV4YW1wbGUub3JnIn0._B3qT6Uut2Z5oZPgRzDp3bYl5cdhJkoTdg_f7tMcVr8
