@@ -5,7 +5,7 @@ import org.apache.logging.log4j.core.appender.rewrite.RewritePolicy;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
-import org.apache.logging.log4j.core.impl.MutableLogEvent;
+import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.core.pattern.RegexReplacement;
 import org.apache.logging.log4j.message.SimpleMessage;
 
@@ -32,9 +32,8 @@ public class LogWrapper implements RewritePolicy {
         for (RegexReplacement r : replace) {
             message = r.format(message);
         }
-        MutableLogEvent newEvent = new MutableLogEvent();
-        newEvent.initFrom(event);
-        newEvent.setMessage(new SimpleMessage(message));
-        return newEvent;
+        return new Log4jLogEvent.Builder(event)
+                .setMessage(new SimpleMessage(message))
+                .build();
     }
 }
