@@ -1,6 +1,6 @@
-package me.demo.logging_Activity.controller;
+package in.org.nnm.logging_Activity.controller;
 
-import me.demo.logging_Activity.utils.CsvReader;
+import in.org.nnm.logging_Activity.utils.CsvReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

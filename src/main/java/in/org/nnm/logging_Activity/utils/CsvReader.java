@@ -1,4 +1,4 @@
-package me.demo.logging_Activity.utils;
+package in.org.nnm.logging_Activity.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

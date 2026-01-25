@@ -1,4 +1,4 @@
-package me.demo.logging_Activity;
+package in.org.nnm.logging_Activity;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
