@@ -5,7 +5,7 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
         </Console>
         <Rewrite name="rewrite">
-            <LogWrapper>
+            <MessageRewritePolicy>
                 <replace regex="([A-Za-z0-9._%+-])([A-Za-z0-9._%+-]*)(@[A-Za-z0-9.-]+\.[A-Za-z]{2,})"
                          replacement="[EMAIL]"/>
                 <replace regex="\+?1?\s*\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}"
@@ -14,7 +14,7 @@
                     <regex><![CDATA[[A-Za-z0-9_%+-]{20,}\.[A-Za-z0-9_%+-]{20,}\.[A-Za-z0-9_%+-]+\b]]></regex>
                     <replacement>[TOKEN]</replacement>
                 </replace>
-            </LogWrapper>
+            </MessageRewritePolicy>
             <Appender-Ref ref="Console"/>
         </Rewrite>
     </Appenders>
