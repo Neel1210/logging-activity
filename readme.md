@@ -1,8 +1,8 @@
-# Logging Activity – Log4j2 Sensitive Data Masking
+# Logging Activity – Log4j Sensitive Data Masking
 
 ## Overview
 
-**Logging Activity** is a Spring Boot application created to experiment with **masking sensitive data in logs** using **Log4j2**
+**Logging Activity** is a Spring Boot application created to experiment with **masking sensitive data in logs** using **Log4j**
 
 This project demonstrates how sensitive information can be masked at the **logging framework level** (not in business
 logic) using a reusable utility dependency.
@@ -14,7 +14,7 @@ logic) using a reusable utility dependency.
 - **Application Name:** logging-activity
 - **Application Framework:** Spring Boot
 - **Base Package:** `in.org.nnm`
-- **Logging Framework:** Log4j2
+- **Logging Framework:** Log4j
 - **Primary Goal:** Mask sensitive data in application logs
 
 ---
@@ -50,20 +50,20 @@ logic) using a reusable utility dependency.
 
 ## External Dependency Used
 
-This project uses a custom utility for Log4j2 masking:
+This project uses a custom utility for Log4j masking:
 
 ```xml
 
 <dependency>
     <groupId>in.org.nnm</groupId>
-    <artifactId>log4j2-utils</artifactId>
+    <artifactId>log4j-utils</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
 
-### Purpose of log4j2-utils
+### Purpose of log4j-utils
 
-- Centralized masking logic for Log4j2
+- Centralized masking logic for Log4j
 - Prevents sensitive data leakage in logs
 - Reusable across multiple Spring Boot applications
 - Keeps business code clean and secure
@@ -71,16 +71,16 @@ This project uses a custom utility for Log4j2 masking:
 ### Sensitive Data Masking – Concept
 
 1. Application generates logs normally
-2. Log messages pass through Log4j2 layouts / rewrite policies
-3. Masking logic from log4j2-utils is applied
+2. Log messages pass through Log4j layouts / rewrite policies
+3. Masking logic from log4j-utils is applied
 4. Sensitive data is replaced with masked values (e.g. ****)
 5. Only masked logs are printed or stored
 
 ---
 
-## Log4j2 Configuration Formats
+## Log4j Configuration Formats
 
-This project includes **four different Log4j2 configuration formats** to experiment with and compare behavior while
+This project includes **four different Log4j configuration formats** to experiment with and compare behavior while
 masking sensitive data.
 
 | File Name           |   Format   |
@@ -95,11 +95,11 @@ Each configuration file demonstrates:
 - Console and JSON appenders
 - Layout configurations
 - Sensitive data masking support
-- Different ways of defining Log4j2 settings
+- Different ways of defining Log4j settings
 
 ---
 
-### Switching Log4j2 Configuration
+### Switching Log4j Configuration
 
 You can switch between configurations by updating the following property in `application.properties`:
 

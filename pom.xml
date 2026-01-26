@@ -12,7 +12,7 @@
     <artifactId>logging-Activity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>logging-Activity</name>
-    <description>log4j2-utils demo or testing project</description>
+    <description>log4j-utils demo or testing project</description>
     <url/>
     <licenses>
         <license/>
@@ -57,7 +57,7 @@
         </dependency>
         <dependency>
             <groupId>in.org.nnm</groupId>
-            <artifactId>log4j2-utils</artifactId>
+            <artifactId>log4j-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
@@ -110,5 +110,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
